@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -25,12 +26,15 @@ public class ExampleAspect {
         return proceed;
     }
 
-    @Before("execution(public void *.method2())")
+    @Pointcut("execution(public void *.method2())")
+    public void method2Pointcut() {} // NOSONAR: pointcut
+
+    @Before("method2Pointcut()")
     public void logBefore() {
         log.info("This should appear before public void method2()");
     }
 
-    @After("execution(public void *.method2())")
+    @After("method2Pointcut()")
     public void logAfter() {
         log.info("This should appear after public void method2()");
     }
