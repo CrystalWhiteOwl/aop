@@ -1,6 +1,5 @@
-package com.intabia.aop;
+package com.intabia.aop.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
@@ -8,8 +7,4 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 public class AppConfig {
 
-    @Bean
-    public DemoAspect demoAspect() {
-        return new DemoAspect();
-    }
 }
