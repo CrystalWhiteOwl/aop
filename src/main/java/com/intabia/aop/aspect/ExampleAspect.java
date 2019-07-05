@@ -14,7 +14,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExampleAspect {
 
-    @Around("@annotation(com.intabia.aop.annotation.LogExecutionTime)")
+    @Pointcut("@annotation(com.intabia.aop.annotation.LogExecutionTime)")
+    public void logExecutionTimePointcut() {} // NOSONAR: pointcut
+
+    @Around("logExecutionTimePointcut()")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
 
@@ -34,7 +37,7 @@ public class ExampleAspect {
         log.info("This should appear before public void method2()");
     }
 
-    @After("method2Pointcut()")
+    @After("method2Pointcut() && logExecutionTimePointcut()")
     public void logAfter() {
         log.info("This should appear after public void method2()");
     }
