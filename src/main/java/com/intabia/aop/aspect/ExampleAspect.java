@@ -2,8 +2,10 @@ package com.intabia.aop.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -21,5 +23,15 @@ public class ExampleAspect {
 
         log.info("{} executed in {} ms", joinPoint.getSignature(), executionTime);
         return proceed;
+    }
+
+    @Before("execution(public void *.method2())")
+    public void logBefore() {
+        log.info("This should appear before public void method2()");
+    }
+
+    @After("execution(public void *.method2())")
+    public void logAfter() {
+        log.info("This should appear after public void method2()");
     }
 }

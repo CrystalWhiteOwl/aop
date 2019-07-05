@@ -18,6 +18,6 @@ public class AopApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		exampleService.method();
+		exampleService.method2();
 	}
 }
